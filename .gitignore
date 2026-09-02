@@ -1,0 +1,58 @@
+# OS metadata
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Metro
+.metro-health-check*
+metro.config.local.js
+
+# React Native / Gradle
+android/.gradle/
+android/app/build/
+android/build/
+android/.kotlin/
+android/local.properties
+android/.cxx/
+*.iml
+*.hprof
+
+# Xcode / CocoaPods
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcuserstate
+ios/**/xcuserdata/
+ios/.xcode.env.local
+vendor/bundle/
+*.jsbundle
+
+# fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Credentials
+*.jks
+*.keystore
+!debug.keystore
+.env
+.env.*
+!.env.example
+
+# Coverage
+coverage/
+
+# Docs (README.md is the only Markdown file that ships)
+*.md
+!README.md
