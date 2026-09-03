@@ -211,7 +211,15 @@ npm run lint && npm run typecheck && npm test
 ```
 
 Tests mirror `src/` and ship fakes for audio, network, and the
-socket, so the entire session lifecycle runs without a device.
+socket, so the entire session lifecycle runs without a device. CI
+runs the same three commands on every push and pull request.
+
+## Contributing
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a pull
+request; [`AGENTS.md`](AGENTS.md) is the architecture document it
+points at. Security problems go to [`SECURITY.md`](SECURITY.md),
+not to a public issue.
 
 ## Documentation
 

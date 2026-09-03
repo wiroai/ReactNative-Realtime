@@ -57,6 +57,11 @@ vendor/bundle/
 # Coverage
 coverage/
 
-# Docs (README.md is the only Markdown file that ships)
+# Docs (only the Markdown files listed below ship; PLAN.md and
+# PARITY.md are internal)
 *.md
 !README.md
+!AGENTS.md
+!CONTRIBUTING.md
+!SECURITY.md
+!CODE_OF_CONDUCT.md
