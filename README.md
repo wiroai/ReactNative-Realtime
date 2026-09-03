@@ -227,7 +227,7 @@ not to a public issue.
 - [Available models](https://wiro.ai/models)
 - [Kotlin counterpart](https://github.com/wiroai/Kotlin-Realtime)
 - [Swift counterpart](https://github.com/wiroai/Swift-Realtime)
-- [Dart counterpart](https://github.com/wiro-ai/Dart-Realtime)
+- [Dart counterpart](https://github.com/wiroai/Dart-Realtime)
 
 ## License
 
