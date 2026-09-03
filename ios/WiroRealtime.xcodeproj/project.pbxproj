@@ -9,9 +9,17 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-WiroRealtime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-WiroRealtime.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2380B9A58441440793D5D7EF /* WiroPcmAudioModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = E685266AFADA48F6B6D0487F /* WiroPcmAudioModule.mm */; };
+		4487E68668414327BC89A378 /* AudioFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCA5B56BA814AAC9BC90757 /* AudioFailure.swift */; };
+		55BA2C5EB7EA4542989B3A07 /* AudioConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59048D3FA3C04464AB4986D8 /* AudioConstants.swift */; };
+		5C0A1E1E9BCC45928D4C169A /* CommunicationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB149FD8364CC1A236DBD9 /* CommunicationRoute.swift */; };
+		5CFD4CEE39264A88A47F842B /* WiroPcmGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97427D91CD914B00B764F27E /* WiroPcmGraph.swift */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B735E7F47102446DABF036C0 /* WiroPcmAudioModuleImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A5C77D2AD421F9648D83D /* WiroPcmAudioModuleImpl.swift */; };
 		C39EA98EC2A631D112A488AB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		DD96C50D61A94410BF7F72C1 /* WiroRealtimeAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF9456B2BF3474DA91803E1 /* WiroRealtimeAudioSession.swift */; };
+		ECC448A57ADD4639A30E048C /* PcmChunker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1031AF9BB4064A8702AED /* PcmChunker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,9 +29,18 @@
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = WiroRealtime/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-WiroRealtime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiroRealtime.debug.xcconfig"; path = "Target Support Files/Pods-WiroRealtime/Pods-WiroRealtime.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-WiroRealtime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiroRealtime.release.xcconfig"; path = "Target Support Files/Pods-WiroRealtime/Pods-WiroRealtime.release.xcconfig"; sourceTree = "<group>"; };
+		59048D3FA3C04464AB4986D8 /* AudioConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConstants.swift; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-WiroRealtime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WiroRealtime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7098D2296710480BB2A70A04 /* WiroPcmAudioModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiroPcmAudioModule.h; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = WiroRealtime/AppDelegate.swift; sourceTree = "<group>"; };
+		770A5C77D2AD421F9648D83D /* WiroPcmAudioModuleImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiroPcmAudioModuleImpl.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = WiroRealtime/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		97427D91CD914B00B764F27E /* WiroPcmGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiroPcmGraph.swift; sourceTree = "<group>"; };
+		97CB149FD8364CC1A236DBD9 /* CommunicationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationRoute.swift; sourceTree = "<group>"; };
+		9DCA5B56BA814AAC9BC90757 /* AudioFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFailure.swift; sourceTree = "<group>"; };
+		AFF9456B2BF3474DA91803E1 /* WiroRealtimeAudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiroRealtimeAudioSession.swift; sourceTree = "<group>"; };
+		DFD1031AF9BB4064A8702AED /* PcmChunker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PcmChunker.swift; sourceTree = "<group>"; };
+		E685266AFADA48F6B6D0487F /* WiroPcmAudioModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WiroPcmAudioModule.mm; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -44,11 +61,29 @@
 			children = (
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
+				2BA77F753A6E452FBEFA6051 /* Audio */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
 			name = WiroRealtime;
+			sourceTree = "<group>";
+		};
+		2BA77F753A6E452FBEFA6051 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				59048D3FA3C04464AB4986D8 /* AudioConstants.swift */,
+				9DCA5B56BA814AAC9BC90757 /* AudioFailure.swift */,
+				DFD1031AF9BB4064A8702AED /* PcmChunker.swift */,
+				97CB149FD8364CC1A236DBD9 /* CommunicationRoute.swift */,
+				AFF9456B2BF3474DA91803E1 /* WiroRealtimeAudioSession.swift */,
+				97427D91CD914B00B764F27E /* WiroPcmGraph.swift */,
+				770A5C77D2AD421F9648D83D /* WiroPcmAudioModuleImpl.swift */,
+				7098D2296710480BB2A70A04 /* WiroPcmAudioModule.h */,
+				E685266AFADA48F6B6D0487F /* WiroPcmAudioModule.mm */,
+			);
+			name = Audio;
+			path = WiroRealtime/Audio;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -247,6 +282,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				55BA2C5EB7EA4542989B3A07 /* AudioConstants.swift in Sources */,
+				4487E68668414327BC89A378 /* AudioFailure.swift in Sources */,
+				ECC448A57ADD4639A30E048C /* PcmChunker.swift in Sources */,
+				5C0A1E1E9BCC45928D4C169A /* CommunicationRoute.swift in Sources */,
+				DD96C50D61A94410BF7F72C1 /* WiroRealtimeAudioSession.swift in Sources */,
+				5CFD4CEE39264A88A47F842B /* WiroPcmGraph.swift in Sources */,
+				B735E7F47102446DABF036C0 /* WiroPcmAudioModuleImpl.swift in Sources */,
+				2380B9A58441440793D5D7EF /* WiroPcmAudioModule.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

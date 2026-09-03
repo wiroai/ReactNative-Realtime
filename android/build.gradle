@@ -1,7 +1,10 @@
 buildscript {
     ext {
         buildToolsVersion = "37.0.0"
-        minSdkVersion = 24
+        // WiroPcmAudio needs AudioFocusRequest (API 26) for call-style
+        // audio focus; the fallback path in CommunicationRoute already
+        // guards its own API 31+ calls separately.
+        minSdkVersion = 26
         compileSdkVersion = 37
         targetSdkVersion = 36
         ndkVersion = "27.1.12297006"

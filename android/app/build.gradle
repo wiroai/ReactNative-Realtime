@@ -112,6 +112,10 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+    // WiroPcmAudio's capture/playback graph mirrors Kotlin-Realtime's
+    // coroutine-based AndroidPcmGraph (callbackFlow, Dispatchers.IO).
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

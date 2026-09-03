@@ -19,12 +19,16 @@ metro.config.local.js
 # React Native / Gradle
 android/.gradle/
 android/app/build/
+android/app/.cxx/
 android/build/
 android/.kotlin/
 android/local.properties
 android/.cxx/
 *.iml
 *.hprof
+
+# React Native CLI codegen cache (autolinking, iOS codegen artifacts)
+/build/
 
 # Xcode / CocoaPods
 ios/Pods/

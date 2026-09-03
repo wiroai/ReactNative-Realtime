@@ -1,6 +1,7 @@
 package ai.wiro.realtime
 
 import android.app.Application
+import ai.wiro.realtime.audio.WiroPcmAudioPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -15,7 +16,7 @@ class MainApplication : Application(), ReactApplication {
       packageList =
         PackageList(this).packages.apply {
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // add(MyReactNativePackage())
+          add(WiroPcmAudioPackage())
         },
     )
   }
