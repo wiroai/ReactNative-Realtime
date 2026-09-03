@@ -210,8 +210,62 @@ export const mossTtsRealtime: ModelDefinition = {
   ],
 };
 
+export const voxcpm2: ModelDefinition = {
+  owner: 'openbmb',
+  slug: 'voxcpm2',
+  displayName: 'VoxCPM2',
+  direction: RealtimeDirection.TextToSpeech,
+  fields: [
+    {
+      id: 'prompt',
+      label: 'Prompt',
+      kind: ModelFieldKind.Textarea,
+      isRequired: false,
+      includeInFirstPass: true,
+    },
+    {
+      id: 'inputAudio',
+      label: 'Reference audio',
+      kind: ModelFieldKind.Text,
+      isRequired: false,
+      includeInFirstPass: false,
+    },
+    {
+      id: 'inputAudio2',
+      label: 'Prompt audio',
+      kind: ModelFieldKind.Text,
+      isRequired: false,
+      includeInFirstPass: false,
+    },
+    {
+      id: 'promptAudioText',
+      label: 'Prompt audio text',
+      kind: ModelFieldKind.Textarea,
+      isRequired: false,
+      includeInFirstPass: false,
+    },
+    {
+      id: 'cfgValue',
+      label: 'CFG value',
+      kind: ModelFieldKind.Float,
+      isRequired: true,
+      includeInFirstPass: true,
+      defaultValue: '2.0',
+    },
+    {
+      id: 'inferenceSteps',
+      label: 'Inference steps',
+      kind: ModelFieldKind.Number,
+      isRequired: false,
+      includeInFirstPass: true,
+      defaultValue: '10',
+    },
+  ],
+};
+
 export const wiroModelCatalog: readonly ModelDefinition[] = [
   gptRealtimeMini,
   voxtralMiniRealtime,
   mossTtsRealtime,
+  voxcpm2,
 ];

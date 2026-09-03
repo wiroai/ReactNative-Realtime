@@ -9,3 +9,7 @@ export * from './trace';
 export * from './raceTimeout';
 export * from './session';
 export * from './webSocketClient';
+export * from './operationGuard';
+export * from './protocolEventLog';
+export * from './elapsedClock';
+export * from './failureMapper';

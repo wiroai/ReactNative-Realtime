@@ -11,7 +11,15 @@ import {
 import { RealtimeSocketClient, RealtimeSocketFrame } from './socketClient';
 import { RealtimeTrace } from './trace';
 
-const DEFAULT_READY_TIMEOUT_MS = 15_000;
+/**
+ * Persistent models (Voxtral) cold-start a worker on the first Run
+ * in a while, and `task_stream_ready` has been observed to trail the
+ * Run response by well over 15 s in that case. A task that never
+ * becomes ready is cancelled and not billed, and the connecting
+ * stage keeps its Cancel button, so waiting longer costs nothing
+ * but patience — failing early costs a fresh cold start.
+ */
+const DEFAULT_READY_TIMEOUT_MS = 60_000;
 const DEFAULT_CLOSE_TIMEOUT_MS = 3_000;
 
 export interface RealtimeSessionOptions {
@@ -29,6 +37,26 @@ interface ReadyWaiter {
 }
 
 /**
+ * The subset of `RealtimeSession` a service depends on.
+ *
+ * Services take this interface — rather than the concrete class —
+ * so they can be exercised against a fake session in tests.
+ */
+export interface RealtimeSessionClient {
+  readonly isReady: boolean;
+  readonly isClosed: boolean;
+  readonly metrics: RealtimeSessionMetrics;
+  addEventListener(listener: (event: RealtimeEvent) => void): void;
+  addErrorListener(listener: (error: unknown) => void): void;
+  addDoneListener(listener: () => void): void;
+  connect(): Promise<void>;
+  sendAudio(pcmBytes: Uint8Array): boolean;
+  sendSessionEnd(): void;
+  stop(): Promise<void>;
+  close(): Promise<void>;
+}
+
+/**
  * Drives one realtime task's socket lifecycle: subscribe, wait for
  * `task_stream_ready`, stream, and close — either cleanly or after
  * a protocol/socket failure.
@@ -38,7 +66,7 @@ interface ReadyWaiter {
  * fields; ordering is instead guaranteed by JS never interleaving
  * two synchronous sections around the same `await`.
  */
-export class RealtimeSession {
+export class RealtimeSession implements RealtimeSessionClient {
   private readonly socketClient: RealtimeSocketClient;
   private readonly taskId: string;
   private readonly taskToken: string;
