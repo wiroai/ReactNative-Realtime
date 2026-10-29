@@ -6,7 +6,7 @@
 
 Realtime voice AI for Android and iOS in React Native and TypeScript: live conversation, speech-to-text and text-to-speech with the Wiro AI API.
 
-[![React Native 0.87](https://img.shields.io/badge/React%20Native-0.87-111111?style=for-the-badge&color=111111&logo=react&logoColor=white)](https://reactnative.dev) [![Android API 26+](https://img.shields.io/badge/Android-API%2026%2B-111111?style=for-the-badge&color=111111&logo=android&logoColor=white)](#requirements) [![iOS 15.1+](https://img.shields.io/badge/iOS-15.1%2B-111111?style=for-the-badge&color=111111&logo=apple&logoColor=white)](#requirements) [![CI](https://img.shields.io/github/actions/workflow/status/wiroai/ReactNative-Realtime/ci.yml?branch=main&style=for-the-badge&color=111111&label=CI&logo=githubactions&logoColor=white)](https://github.com/wiroai/ReactNative-Realtime/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-111111?style=for-the-badge&color=111111)](LICENSE)
+[![React Native 0.87](https://img.shields.io/badge/React%20Native-0.87-111111?style=for-the-badge&color=111111&logo=react&logoColor=white)](https://reactnative.dev) [![Android API 26+](https://img.shields.io/badge/Android-API%2026%2B-111111?style=for-the-badge&color=111111&logo=android&logoColor=white)](#requirements) [![iOS 15.1+](https://img.shields.io/badge/iOS-15.1%2B-111111?style=for-the-badge&color=111111&logo=apple&logoColor=white)](#requirements) [![License: MIT](https://img.shields.io/badge/License-MIT-111111?style=for-the-badge&color=111111)](LICENSE)
 
 [Website](https://wiro.ai) · [Models](https://wiro.ai/models) · [Docs](https://wiro.ai/docs/realtime-voice-conversation) · [Dashboard](https://wiro.ai/panel)
 
