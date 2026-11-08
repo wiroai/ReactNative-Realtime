@@ -2,11 +2,13 @@ import AVFoundation
 import UIKit
 
 /// Which profile a session mode maps to, ported from the Android
-/// port's `SessionProfile`. `.conversation` drives `.voiceChat` mode
-/// (built-in echo cancellation, call-style routing); `.transcription`
-/// keeps `.measurement` mode (raw levels, no AGC) but still routes
-/// like a call; `.speech` is plain media playback with default
-/// routing.
+/// port's `SessionProfile`. `.conversation` and `.transcription` both
+/// drive `.voiceChat` mode (built-in echo cancellation, call-style
+/// routing). Transcription takes the conversation's path, as it does
+/// in Swift-Realtime and Dart-Realtime: `.measurement` mode turns off
+/// the OS input processing, and on real devices the microphone came
+/// through near-silent and the model transcribed nothing. `.speech`
+/// is plain media playback with default routing.
 enum SessionProfile {
     case conversation
     case transcription
@@ -16,8 +18,7 @@ enum SessionProfile {
 
     var mode: AVAudioSession.Mode {
         switch self {
-        case .conversation: return .voiceChat
-        case .transcription: return .measurement
+        case .conversation, .transcription: return .voiceChat
         case .speech: return .default
         }
     }
@@ -158,11 +159,8 @@ final class WiroRealtimeAudioSession {
         lock.lock()
         let profiles = Array(activeReasons.values)
         lock.unlock()
-        if profiles.contains(.conversation) {
+        if profiles.contains(.conversation) || profiles.contains(.transcription) {
             return .voiceChat
-        }
-        if profiles.contains(.transcription) {
-            return .measurement
         }
         return .default
     }

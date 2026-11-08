@@ -20,8 +20,9 @@ import { CodegenTypes, TurboModuleRegistry } from 'react-native';
 
 /** `voice-comm` binds the platform echo canceller and follows the
  * call route (earpiece unless a headset or Bluetooth SCO device is
- * active); `recognition` is a plain microphone tap with no AEC
- * bind, for transcription-only capture. */
+ * active); `recognition` is transcription-only capture: a plain
+ * microphone tap with no AEC bind on Android, and the same
+ * voice-processing path as `voice-comm` on iOS. */
 export type WiroPcmCaptureProfile = string;
 
 /** `conversation` follows the same AEC/voice-comm route as capture;

@@ -1,8 +1,8 @@
 import AVFoundation
 
 /// `voice-comm` binds the platform echo canceller and follows the
-/// call route; `recognition` is a plain microphone tap with no AEC
-/// bind, for transcription-only capture. Mirrors
+/// call route; `recognition` is transcription-only capture and, on
+/// iOS, takes the same voice-processing path as `voice-comm`. Mirrors
 /// `WiroPcmCaptureProfile` in `specs/NativeWiroPcmAudio.ts`.
 enum PcmCaptureProfile {
     case conversation
@@ -225,13 +225,16 @@ final class WiroPcmGraph {
 
     private func installCaptureTap(profile: PcmCaptureProfile) throws {
         let input = engine.inputNode
-        // Voice-processing (built-in AEC/AGC) only for conversation;
-        // recognition wants a raw tap so ASR doesn't see the pitch
-        // shifts the voice processor can introduce. The toggle is
-        // only honoured on a stopped engine, so a graph that is
-        // already playing (Speech, then Conversation) is paused for
-        // it and restarted by `ensureEngineRunning`.
-        let wantsVoiceProcessing = profile == .conversation
+        // Voice processing (built-in AEC/AGC) for conversation and
+        // transcription alike, as in Swift-Realtime and Dart-Realtime:
+        // with the OS input processing off, the microphone came
+        // through near-silent on real devices and the model
+        // transcribed nothing. The toggle is only honoured on a
+        // stopped engine, so a graph that is already playing (Speech,
+        // then Conversation) is paused for it and restarted by
+        // `ensureEngineRunning`.
+        let wantsVoiceProcessing =
+            profile == .conversation || profile == .transcription
         if input.isVoiceProcessingEnabled != wantsVoiceProcessing {
             if engine.isRunning {
                 engine.stop()
