@@ -157,8 +157,10 @@ Run:       POST /Run/{owner}/{model}
 3. After `task_stream_ready`, 20 ms PCM chunks stream up as
    `UTF8(tasktoken + "|") + pcm_bytes`; audio and transcripts stream
    back.
-4. `task_session_end` closes the session. The app sends it on leave,
-   or the server sends it when the task goes quiet.
+4. The app sends `task_session_end` on leave, which closes the
+   session. A quiet session is closed by the server after 30 seconds
+   without speech, and the app then receives `task_end` and
+   `task_postprocess_end`.
 
 Audio is signed 16-bit PCM, 24 kHz, mono, little-endian on both
 sides.

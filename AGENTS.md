@@ -109,16 +109,22 @@ Package / bundle id is `ai.wiro.realtime` on both platforms.
 3. Once `task_stream_ready` arrives, 20 ms PCM chunks stream up as
    `UTF8(tasktoken + "|") + pcm_bytes`; audio and transcripts
    stream back.
-4. `task_session_end` closes it. Leaving and not coming back, or
-   the server winding down a quiet task, both end it this way.
+4. Leaving and not coming back sends `task_session_end`, which
+   closes it. A quiet task is closed by the server after 30 seconds
+   without speech, and the app then receives `task_end` and
+   `task_postprocess_end`.
 
-Wiro charges a realtime task for as long as it is up, and stops one
-that has gone quiet so that it stops charging. The app takes the
-same side. Leaving the screen ends the conversation, a task the
-server winds down is not quietly replaced with another, and
-`ConversationConfig.suspendGracePeriodMs` — zero by default — is
-the dial for holding a task open for someone who might come
-straight back.
+Wiro charges a realtime task turn by turn while it runs, and what a
+turn costs depends on the model: `openai/gpt-realtime-mini` is
+priced by the tokens of each reply, while a time-priced model
+charges for the session time since its previous charge, so a task
+held open on one keeps charging. The server does not keep a quiet
+task, and the app takes the same side. Leaving the screen ends the
+conversation, a task the server closes is not quietly replaced with
+another, and `ConversationConfig.suspendGracePeriodMs`, zero by
+default, is the dial for holding a task open for someone who might
+come straight back. Keep it well under the server's 30-second
+timeout.
 
 A dropped socket is the one case worth fighting for, because the
 speaker is still there mid-sentence. The session resubscribes to

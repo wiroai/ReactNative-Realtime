@@ -41,8 +41,15 @@ export const ConversationConfig = {
    * How long a conversation is held after the speaker leaves, in
    * milliseconds.
    *
-   * Zero — leave the screen and the conversation is over — because
-   * Wiro bills a realtime task by how long it stays up.
+   * Zero, so leaving the screen ends the conversation. Wiro charges a
+   * realtime task turn by turn while it runs, and what a turn costs
+   * depends on the model: `openai/gpt-realtime-mini` is priced by the
+   * tokens of each reply, while a time-priced model charges for the
+   * session time since its previous charge. A held task keeps the
+   * model session open for someone who is not there, which a
+   * time-priced model charges for. The server closes a session after
+   * 30 seconds without speech, so keep any grace period well under
+   * that.
    */
   suspendGracePeriodMs: 0,
 };
