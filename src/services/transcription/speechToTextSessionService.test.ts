@@ -25,44 +25,57 @@ describe('SpeechToTextSessionService', () => {
     await service.dispose();
   });
 
-  it('a growing utterance refines the transcript in place', async () => {
+  it('appends each transcript piece with one space', async () => {
     const dependencies = new TranscriptionTestDependencies();
     const service = dependencies.createService();
     await service.start();
 
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Hello'));
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Hello world'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:If'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:I'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:could'));
 
-    expect(service.snapshot.transcript).toBe('Hello world');
+    expect(service.snapshot.transcript).toBe('If I could');
     expect(
       service.snapshot.protocolEvents.filter(event => event === 'task_output'),
-    ).toHaveLength(2);
+    ).toHaveLength(3);
 
     await service.dispose();
   });
 
-  it('a new utterance joins the transcript instead of erasing it', async () => {
+  it('keeps a piece that starts with the previous one', async () => {
     const dependencies = new TranscriptionTestDependencies();
     const service = dependencies.createService();
     await service.start();
 
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Hello world.'));
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:How are'));
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:How are you?'));
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Good.'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:we'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:were'));
 
-    expect(service.snapshot.transcript).toBe('Hello world. How are you? Good.');
+    expect(service.snapshot.transcript).toBe('we were');
 
     await service.dispose();
   });
 
-  it('a shorter re-emit of the live utterance changes nothing', async () => {
+  it('keeps a repeated piece', async () => {
     const dependencies = new TranscriptionTestDependencies();
     const service = dependencies.createService();
     await service.start();
 
-    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Hello world'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:the'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:the'));
+
+    expect(service.snapshot.transcript).toBe('the the');
+
+    await service.dispose();
+  });
+
+  it('ignores a whitespace-only piece', async () => {
+    const dependencies = new TranscriptionTestDependencies();
+    const service = dependencies.createService();
+    await service.start();
+
     dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:Hello'));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER:   '));
+    dependencies.session.emit(RealtimeEvent.output('TRANSCRIPT_USER: world '));
 
     expect(service.snapshot.transcript).toBe('Hello world');
 

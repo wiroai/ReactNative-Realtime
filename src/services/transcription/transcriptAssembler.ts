@@ -1,46 +1,33 @@
 /**
- * Folds progressive `TRANSCRIPT_USER` events into running text.
+ * Builds the running text from `TRANSCRIPT_USER` pieces.
  *
- * The model streams each utterance and starts over at the next
- * one, so a raw replace would leave only the last fragment. An
- * event that extends the live utterance refines it; one that does
- * not is a new utterance, and the finished one is confirmed.
+ * Each piece carries only new text, often a single word or a short
+ * phrase, and never repeats or revises an earlier one. The full
+ * transcript is every non-empty piece, trimmed and joined with
+ * single spaces, which is also how the server saves it.
  */
 export class TranscriptAssembler {
-  private confirmedValue = '';
-  private liveValue = '';
-
-  get confirmed(): string {
-    return this.confirmedValue;
-  }
-
-  get live(): string {
-    return this.liveValue;
-  }
+  private transcript = '';
 
   reset(): void {
-    this.confirmedValue = '';
-    this.liveValue = '';
+    this.transcript = '';
   }
 
+  /**
+   * Appends one piece and returns the whole transcript, or `null`
+   * when the piece holds no text.
+   */
   applyUserText(text: string): string | null {
     const trimmed = text.trim();
     if (trimmed.length === 0) {
       return null;
     }
-    if (trimmed.startsWith(this.liveValue) || this.liveValue.length === 0) {
-      this.liveValue = trimmed;
-    } else if (!this.liveValue.startsWith(trimmed)) {
-      this.confirmedValue = this.joined();
-      this.liveValue = trimmed;
-    }
-    return this.joined();
+    this.transcript =
+      this.transcript.length === 0 ? trimmed : `${this.transcript} ${trimmed}`;
+    return this.transcript;
   }
 
   joined(): string {
-    if (this.confirmedValue.length === 0) {
-      return this.liveValue;
-    }
-    return `${this.confirmedValue} ${this.liveValue}`;
+    return this.transcript;
   }
 }
